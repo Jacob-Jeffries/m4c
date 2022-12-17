@@ -1,0 +1,59 @@
+:root{
+	--green: rgb(0, 255, 64);
+	--aside-border: rgb(0, 255, 64) 2px solid;
+	--middle-border: rebeccapurple 2px solid;
+	--inside-border: yellow 2px solid;
+}
+
+/*bootstrap breakpoint:
+	Extra Small     none    <576px
+	Small           sm      >= 576px
+	Medium			md		>= 768px
+	Large			lg		>= 992px
+	Extra Large		xl		>= 1200px
+	Extra Extra Lg	xxl		>=1400px
+*/
+
+/*Basic page will be designed at 3 levels: Extra Small Default,	Medium, Large, & XXL */
+
+* {
+	font-family: 'Courier New', Courier, monospace;
+}
+
+/*The idea of having another white website makes my head hurt!*/
+html{
+	background-color: black;
+}
+
+/*Think of this as the page wrapper - I guess this is an older way of thinking!*/
+body { 
+	background-color: #000011;
+	color: white;
+	font-size: 12px;
+}
+
+header{
+	padding: 10px;
+}
+
+main{
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+@media screen and (min-width: 768px){
+	body{
+		font-size: 14px;
+	}
+}
+@media screen and (min-width: 992px){
+	body{
+		font-size: 16px;
+	}
+}
+@media screen and (min-width: 1400px){
+	body {
+		font-size: 18px;
+	}
+}
+
