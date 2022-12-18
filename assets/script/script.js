@@ -2,6 +2,8 @@ let hsBtn = document.querySelector('#high-score');
 let currHS = document.querySelector('#curr-leader');
 let timeRemaining = document.querySelector('#time');
 let testArea = document.querySelector('#test-wrapper');
+let q = document.querySelector('#Q');
+let prompt = document.querySelector('#prompt');
 let start = document.querySelector('#start');
 
 let highScore = localStorage.getItem('highScore');
@@ -24,3 +26,12 @@ let questions = [
   }
 ];
 
+console.log(questions[0]Q[0]);
+
+function main(){
+  for(let i=0; i < questions.length; i++){
+    q.innerText = questions[0][0];
+  }
+};
+
+start.addEventListener("click", main);
