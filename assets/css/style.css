@@ -20,6 +20,10 @@
 	font-family: 'Courier New', Courier, monospace;
 }
 
+.border{
+	border: white 1px solid;
+}
+
 /*The idea of having another white website makes my head hurt!*/
 html{
 	background-color: black;
@@ -33,6 +37,10 @@ body {
 }
 
 header{
+	padding: 15px;
+}
+
+nav{
 	padding: 10px;
 }
 
