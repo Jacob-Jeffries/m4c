@@ -2,6 +2,7 @@ let hsBtn = document.querySelector('#high-score');
 let currHS = document.querySelector('#curr-leader');
 let timeRemaining = document.querySelector('#time');
 let testArea = document.querySelector('#test-wrapper');
+let start = document.querySelector('#start');
 
 let highScore = localStorage.getItem('highScore');
 

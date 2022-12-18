@@ -33,7 +33,7 @@
       <nav class="navbar bg-dark row d-flex">
           
           <div id="btn-wrapper" class="col-12 col-md-4 p-2">
-            <button type="button" id="high-score" class="border bg-dark rounded btn-outline-secondary text-white">High Scores</button>
+            <button type="button" id="high-score" class="bg-dark rounded btn-outline-secondary text-white">High Scores</button>
           </div>
 
           <div id="curr-leader" class="col-12 col-md-4 p-2">Current High Score: </div>
@@ -49,8 +49,16 @@
 
     <main>
 
-      <div id="test-wrapper" class="col border d-flex justify-content-center">
-
+      <div id="test-wrapper" class="col d-flex justify-content-center">
+        <div class="card">
+          <div class="card-body bg-dark">
+            <h5 id="Q" class="card-title">Start Quiz</h5>
+            <p class="card-text">This is a timed quiz, covering general JavaScript concepts.</p>
+            <div id="btns">
+              <button type="button" id="start" class="btn bg-dark rounded btn-outline-secondary text-white w-100">Start Quiz</button>
+            </div>      
+          </div>
+        </div>
       </div>
 
     </main>
