@@ -30,36 +30,14 @@
     	<h1 id="top" class="row d-flex justify-content-center">Jacob's Code Assessment</h1>
       <hr />
       <!--I switched the nav-bar to expand on medium displays-->
-      <nav class="navbar navbar-expand-md bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">Pricing</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown link
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+      <nav class="navbar bg-dark d-flex row justify-content-center">
+        <div class="col=12 col-md-6">
+          <button type="button" class="btn btn-outline-secondary text-white">High Scores</button>
+          <span id="curr-leader" c;ass="text-white">Current High Score: </span>
+        </div>
+
+        <div class="col-12 col-md-6 d-flex align-items-center">
+            <span id="time" class="time">Time Remaining: </span>
         </div>
       </nav>
     
@@ -72,17 +50,9 @@
 
       <!--ADD Main content Here-->
 
-      <article id="article-01" class="row">
+      <div id="test" class="d-flex row">
 
-        <!--Be careful in an article - you don't want people to hae to scroll back up a column-->
-        <p class="col-12 col-lg-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Imperdiet sed euismod nisi porta. Sem fringilla ut morbi tincidunt augue interdum velit. Dolor magna eget est lorem ipsum dolor. Vulputate enim nulla aliquet porttitor lacus luctus. Adipiscing enim eu turpis egestas pretium aenean pharetra magna ac. Nec ullamcorper sit amet risus nullam eget felis eget. Libero enim sed faucibus turpis in eu. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est. Risus quis varius quam quisque id diam vel. Ultrices vitae auctor eu augue ut lectus arcu. Mattis enim ut tellus elementum. Nec feugiat in fermentum posuere urna nec.
-        </p>
-        
-        <p class="co-12 col-lg-6 ">
-          Dictum non consectetur a erat. Lorem donec massa sapien faucibus et. Ut tristique et egestas quis ipsum suspendisse ultrices. Blandit aliquam etiam erat velit scelerisque in dictum non consectetur. Ultricies lacus sed turpis tincidunt id aliquet risus. Ipsum dolor sit amet consectetur adipiscing elit ut. A iaculis at erat pellentesque adipiscing commodo elit. Odio aenean sed adipiscing diam donec adipiscing. Senectus et netus et malesuada fames ac. Aliquet eget sit amet tellus cras adipiscing enim eu turpis. Lacus viverra vitae congue eu consequat ac felis donec et. Tincidunt id aliquet risus feugiat in ante metus dictum. Nullam non nisi est sit amet facilisis magna etiam. Odio ut enim blandit volutpat maecenas volutpat blandit. Laoreet non curabitur gravida arcu ac tortor dignissim convallis. Tincidunt augue interdum velit euismod in pellentesque. Ipsum dolor sit amet consectetur. Pretium viverra suspendisse potenti nullam ac. Aliquet lectus proin nibh nisl.
-        </p>
-      </article>
+      </div>
 
     </main>
     
