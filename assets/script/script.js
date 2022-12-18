@@ -34,14 +34,37 @@ start.addEventListener("click", function(){
 });
 
 function main(i, score){
+  
   newQuestion(i);
   select(i, score);
+  
 };
 
 function newQuestion (i){
   q.innerText = questions[i]["Q"];
     prompt.style.display = "none";
     start.style.display = "none";
+
+    let BtnA = document.querySelector('#A');
+    let BtnB = document.querySelector('#B');
+    let BtnC = document.querySelector('#C');
+    let BtnD = document.querySelector('#D');
+
+    if(BtnA){
+      BtnA.remove();
+    }
+
+    if(BtnB){
+      BtnB.remove();
+    }
+
+    if(BtnC){
+      BtnC.remove();
+    }
+
+    if(BtnD){
+      BtnD.remove();
+    }
 
     let btnA = document.createElement("button");
       btnA.setAttribute("type", "button");
@@ -87,30 +110,40 @@ function select(i, score){
   let btnD = document.querySelector('#D');
 
   btnA.addEventListener("click", function(){
-    currScore = checkA(i, score);
+    tracker = checkA(i, score);
+    console.log(tracker);
+    main(tracker[0], tracker[1]);
   });
 
   btnB.addEventListener("click", function(){
-    currScore = checkB(i, score);
+    tracker = checkB(i, score);
+    console.log(tracker);
+    main(tracker[0], tracker[1]);
   });
 
   btnC.addEventListener("click", function(){
-    ret = checkC(i, score);
-    console.log(ret);
+    tracker = checkC(i, score);
+    console.log(tracker);
+    main(tracker[0], tracker[1]);
   });
 
   btnD.addEventListener("click", function(){
-    currScore = checkD(i, score);
+    tracker = checkD(i, score);
+    console.log(tracker);
+    main(tracker[0], tracker[1]);
   });
 };
 
 function checkA(i, currScore){
   if(questions[i]["A"][0]){
     currScore++;
+    i++;
+    return [i, currScore];
   }else{
-    return;
+    i++;
+    return [i, currScore];
   }
- };
+};
 
 function checkB(i, currScore){
   if(questions[i]["B"][0]){
@@ -118,9 +151,10 @@ function checkB(i, currScore){
     i++;
     return [i, currScore];
   }else{
-    return;
+    i++;
+    return [i, currScore];
   }
-  };
+};
 
 function checkC(i, currScore){
   if(questions[i]["C"][0]){
@@ -128,14 +162,18 @@ function checkC(i, currScore){
     i++;
     return [i, currScore];
   }else{
-    return;
+    i++;
+    return [i, currScore];
   }
-  };
+};
 
 function checkD(i, currScore){
   if(questions[i]["D"][0]){
     currScore++;
+    i++;
+    return [i, currScore];
   }else{
-    return;
+    i++;
+    return [i, currScore];
   }
 };
