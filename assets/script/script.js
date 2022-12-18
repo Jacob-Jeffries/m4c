@@ -5,6 +5,7 @@ let testArea = document.querySelector('#test-wrapper');
 
 let highScore = localStorage.getItem('highScore');
 
+//Question pool pulled from https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
 let questions = [
   {
     "Q": 'Inside which HTML element do we put the Javascript?',
