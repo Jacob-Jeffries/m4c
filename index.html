@@ -30,15 +30,19 @@
     	<h1 id="top" class="row d-flex justify-content-center">Jacob's Code Assessment</h1>
       <hr />
       <!--I switched the nav-bar to expand on medium displays-->
-      <nav class="navbar bg-dark d-flex row justify-content-center">
-        <div class="col=12 col-md-6">
-          <button type="button" class="btn btn-outline-secondary text-white">High Scores</button>
-          <span id="curr-leader" c;ass="text-white">Current High Score: </span>
-        </div>
+      <nav class="navbar bg-dark d-flex row">
 
-        <div class="col-12 col-md-6 d-flex align-items-center">
+        <div class="d-flex row col-12 col-md-6 align-items-center">
+          <div id="btn-wrapper" class="col-12 col-md-4">
+            <button type="button" class="btn btn-outline-secondary text-white">High Scores</button>
+          </div>
+          <span id="curr-leader" class="col-12 col-md-4 text-white">Current High Score: </span>
+        </div>        
+
+        <div class="col-12 col-md-6">
             <span id="time" class="time">Time Remaining: </span>
         </div>
+
       </nav>
     
     </header>
