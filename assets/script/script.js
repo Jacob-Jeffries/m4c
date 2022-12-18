@@ -16,14 +16,24 @@ let questions = [
     "A": [false, '<javascript>'],
     "B": [false, '<js>'],
     "C": [true, '<script>'],
-    "D": [false, '<scripting>']
+    "D": [false, '<scripting>'],
+    "L": 1
+  },
+  {
+    "Q": "Where is the correct place to insert a JavaScript?",
+    "A": [false, "Both in the <head> section and the <body> section."],
+    "B": [false, "At the top of the <body> section."],
+    "C": [false, "In the <head> section."],
+    "D": [true, "At the bottom of the <body> section."]
+    "L": 1
   },
   {
     "Q": 'What is the correct JavaScript syntax to change the content of the HTML element below?\n\n<p id="demo">This is a demonstration.</p>',
     "A": [true, 'document.getElementById("demo").innerHTML = "Hello World!"'],
     "B": [false, 'document.getElement("p").innerHTML = "Hello World!"'],
     "C": [false, 'document.GetElementByName("p").innerHTML = "Hello World!"'],
-    "D": [false, '#demo.innerHTML = "Hello World!"']
+    "D": [false, '#demo.innerHTML = "Hello World!"'],
+    "L": 2
   }
 ];
 
@@ -35,16 +45,16 @@ start.addEventListener("click", function(){
 
 function main(i, score){
   
-  newQuestion(i);
-  select(i, score);
-  
+  if(questions[i]){
+    newQuestion(i);
+    select(i, score);
+  }else{
+    endSeries(score)
+  }
+
 };
 
-function newQuestion (i){
-  q.innerText = questions[i]["Q"];
-  prompt.style.display = "none";
-  start.style.display = "none";
-
+function removeBtns(){
   let BtnA = document.querySelector('#A');
   let BtnB = document.querySelector('#B');
   let BtnC = document.querySelector('#C');
@@ -65,6 +75,14 @@ function newQuestion (i){
   if(BtnD){
     BtnD.remove();
   }
+};
+
+function newQuestion (i){
+  q.innerText = questions[i]["Q"];
+  prompt.style.display = "none";
+  start.style.display = "none";
+
+  removeBtns();
 
   let btnA = document.createElement("button");
     btnA.setAttribute("type", "button");
@@ -177,3 +195,9 @@ function checkD(i, currScore){
     return [i, currScore];
   }
 };
+
+function endSeries(finalScore){
+  removeBtns();
+
+  q.innerText = "Your Final Score is: " + finalScore +"!";
+}
