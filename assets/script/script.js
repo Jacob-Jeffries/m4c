@@ -7,8 +7,6 @@ let prompt = document.querySelector('#prompt');
 let btns = document.querySelector('#btns');
 let start = document.querySelector('#start');
 
-let highScore = localStorage.getItem('highScore');
-
 //Question pool pulled from https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
 let questions = [
   {
@@ -19,7 +17,7 @@ let questions = [
     "D": [false, '<scripting>']
   },
   {
-    "Q": 'What is the correct JavaScript syntax to change the content of the HTML element below?\n<p id="demo">This is a demonstration.</p>',
+    "Q": 'What is the correct JavaScript syntax to change the content of the HTML element below?\n\n<p id="demo">This is a demonstration.</p>',
     "A": [true, 'document.getElementById("demo").innerHTML = "Hello World!"'],
     "B": [false, 'document.getElement("p").innerHTML = "Hello World!"'],
     "C": [false, 'document.GetElementByName("p").innerHTML = "Hello World!"'],
@@ -29,48 +27,57 @@ let questions = [
 
 console.log(questions[0]["Q"]);
 
-function newQuestion (){
-  q.innerText = questions[0]["Q"];
+let highScore = localStorage.getItem('highScore');
+
+function newQuestion (i){
+  q.innerText = questions[i]["Q"];
     prompt.style.display = "none";
     start.style.display = "none";
 
     let btnA = document.createElement("button");
       btnA.setAttribute("type", "button");
       btnA.setAttribute("id", "A");
-      btnA.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100");
-      btnA.innerText = questions[0]["A"][1];
+      btnA.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+      btnA.innerText = questions[i]["A"][1];
       btns.appendChild(btnA);
 
     let btnB = document.createElement("button");
       btnB.setAttribute("type", "button");
       btnB.setAttribute("id", "B");
-      btnB.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100");
-      btnB.innerText = questions[0]["B"][1];
+      btnB.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+      btnB.innerText = questions[i]["B"][1];
       btns.appendChild(btnB);
 
     let btnC = document.createElement("button");
       btnC.setAttribute("type", "button");
       btnC.setAttribute("id", "C");
-      btnC.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100");
-      btnC.innerText = questions[0]["C"][1];
-      btns.append(btnC);
+      btnC.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+      btnC.innerText = questions[i]["C"][1];
+      btns.appendChild(btnC);
 
     let btnD = document.createElement("button");
       btnD.setAttribute("type", "button");
       btnD.setAttribute("id", "D");
-      btnD.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100");
-      btnD.innerText = questions[0]["D"][1];
-      btns.append(btnD);
+      btnD.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+      btnD.innerText = questions[i]["D"][1];
+      btns.appendChild(btnD);
+    
+    return;
 };
 
-function selectAnswer(){
-  
+function selectAnswer(currScore){
+
+
 };
 
 
 function main(){
-  newQuestion();
 
+  let i = 1;
+  let currScore = 0;
+
+  newQuestion(i);
+  selectAnswer(currScore);
 };
 
 start.addEventListener("click", main);
