@@ -42,59 +42,59 @@ function main(i, score){
 
 function newQuestion (i){
   q.innerText = questions[i]["Q"];
-    prompt.style.display = "none";
-    start.style.display = "none";
+  prompt.style.display = "none";
+  start.style.display = "none";
 
-    let BtnA = document.querySelector('#A');
-    let BtnB = document.querySelector('#B');
-    let BtnC = document.querySelector('#C');
-    let BtnD = document.querySelector('#D');
+  let BtnA = document.querySelector('#A');
+  let BtnB = document.querySelector('#B');
+  let BtnC = document.querySelector('#C');
+  let BtnD = document.querySelector('#D');
 
-    if(BtnA){
-      BtnA.remove();
-    }
+  if(BtnA){
+    BtnA.remove();
+  }
 
-    if(BtnB){
-      BtnB.remove();
-    }
+  if(BtnB){
+    BtnB.remove();
+  }
 
-    if(BtnC){
-      BtnC.remove();
-    }
+  if(BtnC){
+    BtnC.remove();
+  }
 
-    if(BtnD){
-      BtnD.remove();
-    }
+  if(BtnD){
+    BtnD.remove();
+  }
 
-    let btnA = document.createElement("button");
-      btnA.setAttribute("type", "button");
-      btnA.setAttribute("id", "A");
-      btnA.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
-      btnA.innerText = questions[i]["A"][1];
-      btns.appendChild(btnA);
+  let btnA = document.createElement("button");
+    btnA.setAttribute("type", "button");
+    btnA.setAttribute("id", "A");
+    btnA.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+    btnA.innerText = questions[i]["A"][1];
+    btns.appendChild(btnA);
 
-    let btnB = document.createElement("button");
-      btnB.setAttribute("type", "button");
-      btnB.setAttribute("id", "B");
-      btnB.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
-      btnB.innerText = questions[i]["B"][1];
-      btns.appendChild(btnB);
+  let btnB = document.createElement("button");
+    btnB.setAttribute("type", "button");
+    btnB.setAttribute("id", "B");
+    btnB.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+    btnB.innerText = questions[i]["B"][1];
+    btns.appendChild(btnB);
 
-    let btnC = document.createElement("button");
-      btnC.setAttribute("type", "button");
-      btnC.setAttribute("id", "C");
-      btnC.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
-      btnC.innerText = questions[i]["C"][1];
-      btns.appendChild(btnC);
+  let btnC = document.createElement("button");
+    btnC.setAttribute("type", "button");
+    btnC.setAttribute("id", "C");
+    btnC.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+    btnC.innerText = questions[i]["C"][1];
+    btns.appendChild(btnC);
 
-    let btnD = document.createElement("button");
-      btnD.setAttribute("type", "button");
-      btnD.setAttribute("id", "D");
-      btnD.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
-      btnD.innerText = questions[i]["D"][1];
-      btns.appendChild(btnD);
+  let btnD = document.createElement("button");
+    btnD.setAttribute("type", "button");
+    btnD.setAttribute("id", "D");
+    btnD.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+    btnD.innerText = questions[i]["D"][1];
+    btns.appendChild(btnD);
     
-    return;
+  return;
 };
 
 //https://www.w3schools.com/js/js_htmldom_eventlistener.asp
