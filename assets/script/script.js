@@ -7,6 +7,8 @@ let prompt = document.querySelector('#prompt');
 let btns = document.querySelector('#btns');
 let start = document.querySelector('#start');
 
+let tracker = [0,0];
+
 //Question pool pulled from https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
 let questions = [
   {
@@ -25,9 +27,16 @@ let questions = [
   }
 ];
 
-console.log(questions[0]["Q"]);
-
 let highScore = localStorage.getItem('highScore');
+
+start.addEventListener("click", function(){
+  main(tracker[0], tracker[1]);
+});
+
+function main(i, score){
+  newQuestion(i);
+  select(i, score);
+};
 
 function newQuestion (i){
   q.innerText = questions[i]["Q"];
@@ -65,19 +74,68 @@ function newQuestion (i){
     return;
 };
 
-function selectAnswer(currScore){
+//https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+//When passing parameter values, use an "anonymous function" that calls the specified function with the parameters
+//element.addEventListener("click", function(){ myFunction(p1, p2); });
+//Like WTF JS - just pass a parameter!
 
+function select(i, score){
 
+  let btnA = document.querySelector('#A');
+  let btnB = document.querySelector('#B');
+  let btnC = document.querySelector('#C');
+  let btnD = document.querySelector('#D');
+
+  btnA.addEventListener("click", function(){
+    currScore = checkA(i, score);
+  });
+
+  btnB.addEventListener("click", function(){
+    currScore = checkB(i, score);
+  });
+
+  btnC.addEventListener("click", function(){
+    ret = checkC(i, score);
+    console.log(ret);
+  });
+
+  btnD.addEventListener("click", function(){
+    currScore = checkD(i, score);
+  });
 };
 
+function checkA(i, currScore){
+  if(questions[i]["A"][0]){
+    currScore++;
+  }else{
+    return;
+  }
+ };
 
-function main(){
+function checkB(i, currScore){
+  if(questions[i]["B"][0]){
+    currScore++;
+    i++;
+    return [i, currScore];
+  }else{
+    return;
+  }
+  };
 
-  let i = 1;
-  let currScore = 0;
+function checkC(i, currScore){
+  if(questions[i]["C"][0]){
+    currScore++;
+    i++;
+    return [i, currScore];
+  }else{
+    return;
+  }
+  };
 
-  newQuestion(i);
-  selectAnswer(currScore);
+function checkD(i, currScore){
+  if(questions[i]["D"][0]){
+    currScore++;
+  }else{
+    return;
+  }
 };
-
-start.addEventListener("click", main);
