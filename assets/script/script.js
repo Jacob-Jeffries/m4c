@@ -7,6 +7,7 @@ let prompt = document.querySelector('#prompt');
 let btns = document.querySelector('#btns');
 let start = document.querySelector('#start');
 let tracker = [0,0];
+let timeLeft = 60;
 
 //Question pool pulled from https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
 let questions = [
@@ -43,39 +44,38 @@ if(!JSON.parse(localStorage.getItem('highScore'))){
   localStorage.setItem('highScore', JSON.stringify(highScore));
 };
 
+timeRemaining.innerText = "75";
+
 highScore = JSON.parse(localStorage.getItem('highScore'));
 currHS.innerText = "Current Leader: "+ highScore[0]["int"];
 
 hsBtn.addEventListener("click", scoreScreen);
 
 start.addEventListener("click", function(){
+
+  let timeInterval = setInterval(function() {
+    if (timeLeft > 1){
+      timeRemaining.innerText = timeLeft;
+      timeLeft--;
+    }else{
+      clearInterval(timeInterval);
+      timeRemaining.innerText = "END";
+      endSeries(tracker[0], tracker[1]);
+    }
+  }, 1000);
+
   main(tracker[0], tracker[1]);
 });
 
 function main(i, score){
-
-  timer(i, score);
-  
-  if(questions[i]){
+    if(questions[i]){
     newQuestion(i);
     select(i, score);
+  }else if(timeLeft <= 0){
+    return;
   }else{
     endSeries(i, score)
   }
-
-};
-
-function timer(i, score){
-  let timeLeft = 75;
-  let timeInterval = setInterval(function() {
-    if (timeLeft > 1){
-      timeRemaining.innerText = "Seconds Remaining: " + timeLeft;
-      timeLeft--;
-    }else{
-      clearInterval(timeInterval);
-      endSeries(i, score);
-    }
-  }, 1000);
 };
 
 function removeBtns(){
@@ -182,6 +182,7 @@ function checkA(i, currScore){
     i++;
     return [i, currScore];
   }else{
+    timeLeft = timeLeft - 20;
     i++;
     return [i, currScore];
   }
@@ -193,6 +194,7 @@ function checkB(i, currScore){
     i++;
     return [i, currScore];
   }else{
+    timeLeft = timeLeft - 20;
     i++;
     return [i, currScore];
   }
@@ -204,6 +206,7 @@ function checkC(i, currScore){
     i++;
     return [i, currScore];
   }else{
+    timeLeft = timeLeft - 20;
     i++;
     return [i, currScore];
   }
@@ -215,6 +218,7 @@ function checkD(i, currScore){
     i++;
     return [i, currScore];
   }else{
+    timeLeft = timeLeft - 20;
     i++;
     return [i, currScore];
   }
@@ -227,7 +231,7 @@ function endSeries(i, finalScore){
   removeBtns();
   q.innerText = "Your Final Score is: " + finalScore +" out of a possible " + i + ".";
 
-  if((finalScore/i)*100 == 100){
+  if((finalScore/3)*100 == 100){
     let excellent = document.createElement("img");
     excellent.setAttribute("id", "excellent");
     excellent.setAttribute("src", "./images/excellent.jpg");
@@ -271,9 +275,9 @@ function endSeries(i, finalScore){
     saveScore(initials.value.trim(), finalScore);
   });
 }
-function loadScore(){
-  let highScore = localStorage.getItem('highScore');
-};
+// function loadScore(){
+//   let highScore = localStorage.getItem('highScore');
+// };
 
 function saveScore(int, score){
 
