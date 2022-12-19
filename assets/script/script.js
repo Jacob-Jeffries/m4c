@@ -6,12 +6,6 @@ let q = document.querySelector('#Q');
 let prompt = document.querySelector('#prompt');
 let btns = document.querySelector('#btns');
 let start = document.querySelector('#start');
-
-let highScore = {
-  initials: [],
-  scores: []
-}
-
 let tracker = [0,0];
 
 //Question pool pulled from https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
@@ -38,6 +32,20 @@ let questions = [
     "D": [false, '#demo.innerHTML = "Hello World!"']
   }
 ];
+
+if(!JSON.parse(localStorage.getItem('highScore'))){
+  let highScore = [
+    {
+    "int": "New Player",
+    "score": 0
+    }
+  ];
+  localStorage.setItem('highScore', JSON.stringify(highScore));
+};
+
+highScore = JSON.parse(localStorage.getItem('highScore'));
+currHS.innerText = "Current Leader: "+ highScore[0]["int"];
+
 
 start.addEventListener("click", function(){
   main(tracker[0], tracker[1]);
@@ -240,20 +248,27 @@ function endSeries(i, finalScore){
 
 
   submit.addEventListener("click", function(){
-    this.click.preventDefault();
-    saveScore(finalScore);
+    event.preventDefault();
+    saveScore(initials.value.trim(), finalScore);
   });
 }
 function loadScore(){
   let highScore = localStorage.getItem('highScore');
 };
 
-function saveScore(score){
-  let scores = {
-    initials: [initials.value.trim()],
-    score: [score]
-  }
+function saveScore(int, score){
 
+  let newScore = [];
+  newScore = {"int": int, "score": score};
+  highScore.push(newScore);
+  console.log(highScore);
+
+  highScore.sort((a, b) => b.score - a.score);
+  console.log(highScore);
+
+  localStorage.setItem('highScore', JSON.stringify(highScore));
+
+  scoreScreen();
 };
 
 
