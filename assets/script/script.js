@@ -24,7 +24,7 @@ let questions = [
     "A": [false, "Both in the <head> section and the <body> section."],
     "B": [false, "At the top of the <body> section."],
     "C": [false, "In the <head> section."],
-    "D": [true, "At the bottom of the <body> section."]
+    "D": [true, "At the bottom of the <body> section."],
     "L": 1
   },
   {
@@ -49,7 +49,7 @@ function main(i, score){
     newQuestion(i);
     select(i, score);
   }else{
-    endSeries(score)
+    endSeries(i, score)
   }
 
 };
@@ -196,8 +196,28 @@ function checkD(i, currScore){
   }
 };
 
-function endSeries(finalScore){
+function endSeries(i, finalScore){
   removeBtns();
+  q.innerText = "Your Final Score is: " + finalScore +" out of a possible " + i + ".";
+  prompt.style.display = "block";
+  prompt.innerText = "Enter your initials below to save your score:";
+  let form = document.createElement("form");
+  let input = document.createElement("input");
+  input.setAttribute("type", "text");
+  input.setAttribute("id", "int");
+  input.setAttribute("name", "init");
+  input.setAttribute("placeholder", "JWJ");
+  input.setAttribute("size", "3");
+  let submit = document.createElement("input");
+  submit.setAttribute("type", "submit");
+  submit.setAttribute("value", "Submit Score");
+  submit.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+  btns.appendChild(form);
+  btns.appendChild(input);
+  btns.appendChild(submit);
 
-  q.innerText = "Your Final Score is: " + finalScore +"!";
+  submit.addEventListener("click", scoreScreen);
 }
+
+function scoreScreen(){
+};
