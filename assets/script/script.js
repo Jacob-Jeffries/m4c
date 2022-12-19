@@ -7,6 +7,11 @@ let prompt = document.querySelector('#prompt');
 let btns = document.querySelector('#btns');
 let start = document.querySelector('#start');
 
+let highScore = {
+  initials: [],
+  scores: []
+}
+
 let tracker = [0,0];
 
 //Question pool pulled from https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
@@ -16,28 +21,23 @@ let questions = [
     "A": [false, '<javascript>'],
     "B": [false, '<js>'],
     "C": [true, '<script>'],
-    "D": [false, '<scripting>'],
-    "L": 1
+    "D": [false, '<scripting>']
   },
   {
     "Q": "Where is the correct place to insert a JavaScript?",
     "A": [false, "Both in the <head> section and the <body> section."],
     "B": [false, "At the top of the <body> section."],
     "C": [false, "In the <head> section."],
-    "D": [true, "At the bottom of the <body> section."],
-    "L": 1
+    "D": [true, "At the bottom of the <body> section."]
   },
   {
     "Q": 'What is the correct JavaScript syntax to change the content of the HTML element below?\n\n<p id="demo">This is a demonstration.</p>',
     "A": [true, 'document.getElementById("demo").innerHTML = "Hello World!"'],
     "B": [false, 'document.getElement("p").innerHTML = "Hello World!"'],
     "C": [false, 'document.GetElementByName("p").innerHTML = "Hello World!"'],
-    "D": [false, '#demo.innerHTML = "Hello World!"'],
-    "L": 2
+    "D": [false, '#demo.innerHTML = "Hello World!"']
   }
 ];
-
-let highScore = localStorage.getItem('highScore');
 
 start.addEventListener("click", function(){
   main(tracker[0], tracker[1]);
@@ -236,14 +236,27 @@ function endSeries(i, finalScore){
   form.appendChild(input);
   form.appendChild(submit);
 
+  let initials = document.querySelector('#int');
+
+
   submit.addEventListener("click", function(){
-    storeScore(finalScore);
+    this.click.preventDefault();
+    saveScore(finalScore);
   });
 }
-
-function storeScore(score){
-  
+function loadScore(){
+  let highScore = localStorage.getItem('highScore');
 };
+
+function saveScore(score){
+  let scores = {
+    initials: [initials.value.trim()],
+    score: [score]
+  }
+
+};
+
+
 
 function scoreScreen(){
 };
