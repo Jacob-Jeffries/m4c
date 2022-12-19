@@ -197,27 +197,53 @@ function checkD(i, currScore){
 };
 
 function endSeries(i, finalScore){
+
+  let br = document.createElement("br");
+
   removeBtns();
   q.innerText = "Your Final Score is: " + finalScore +" out of a possible " + i + ".";
-  prompt.style.display = "block";
-  prompt.innerText = "Enter your initials below to save your score:";
+
+  if((finalScore/i)*100 == 100){
+    let excellent = document.createElement("img");
+    excellent.setAttribute("src", "./images/excellent.jpg");
+    excellent.setAttribute("alt", "excellent");
+    excellent.setAttribute("class", "img-fluid rounded mx-auto d-block"); 
+    btns.appendChild(excellent);
+    btns.appendChild(br);
+  }
+
   let form = document.createElement("form");
+  let label = document.createElement("label");
+  label.setAttribute("for", "int");
+  label.innerText = "Enter your initials, and save your score:";
+
   let input = document.createElement("input");
   input.setAttribute("type", "text");
   input.setAttribute("id", "int");
   input.setAttribute("name", "init");
   input.setAttribute("placeholder", "JWJ");
   input.setAttribute("size", "3");
+  input.setAttribute("class", "m-2");
   let submit = document.createElement("input");
   submit.setAttribute("type", "submit");
   submit.setAttribute("value", "Submit Score");
   submit.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+  btns.appendChild(br);
+  btns.appendChild(br);
   btns.appendChild(form);
-  btns.appendChild(input);
-  btns.appendChild(submit);
+  form.appendChild(label);
+  form.appendChild(br);
+  form.appendChild(input);
+  form.appendChild(submit);
 
-  submit.addEventListener("click", scoreScreen);
+  submit.addEventListener("click", function(){
+    storeScore(finalScore);
+  });
 }
+
+function storeScore(score){
+  
+};
 
 function scoreScreen(){
 };
