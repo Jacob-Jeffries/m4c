@@ -46,12 +46,15 @@ if(!JSON.parse(localStorage.getItem('highScore'))){
 highScore = JSON.parse(localStorage.getItem('highScore'));
 currHS.innerText = "Current Leader: "+ highScore[0]["int"];
 
+hsBtn.addEventListener("click", scoreScreen);
 
 start.addEventListener("click", function(){
   main(tracker[0], tracker[1]);
 });
 
 function main(i, score){
+
+  timer(i, score);
   
   if(questions[i]){
     newQuestion(i);
@@ -60,6 +63,19 @@ function main(i, score){
     endSeries(i, score)
   }
 
+};
+
+function timer(i, score){
+  let timeLeft = 75;
+  let timeInterval = setInterval(function() {
+    if (timeLeft > 1){
+      timeRemaining.innerText = "Seconds Remaining: " + timeLeft;
+      timeLeft--;
+    }else{
+      clearInterval(timeInterval);
+      endSeries(i, score);
+    }
+  }, 1000);
 };
 
 function removeBtns(){
@@ -213,6 +229,7 @@ function endSeries(i, finalScore){
 
   if((finalScore/i)*100 == 100){
     let excellent = document.createElement("img");
+    excellent.setAttribute("id", "excellent");
     excellent.setAttribute("src", "./images/excellent.jpg");
     excellent.setAttribute("alt", "excellent");
     excellent.setAttribute("class", "img-fluid rounded mx-auto d-block"); 
@@ -221,6 +238,7 @@ function endSeries(i, finalScore){
   }
 
   let form = document.createElement("form");
+  form.setAttribute("id", "form");
   let label = document.createElement("label");
   label.setAttribute("for", "int");
   label.innerText = "Enter your initials, and save your score:";
@@ -229,10 +247,11 @@ function endSeries(i, finalScore){
   input.setAttribute("type", "text");
   input.setAttribute("id", "int");
   input.setAttribute("name", "init");
-  input.setAttribute("placeholder", "JWJ");
+  input.setAttribute("placeholder", "INT");
   input.setAttribute("size", "3");
   input.setAttribute("class", "m-2");
   let submit = document.createElement("input");
+  submit.setAttribute("id", "submit");
   submit.setAttribute("type", "submit");
   submit.setAttribute("value", "Submit Score");
   submit.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
@@ -258,6 +277,10 @@ function loadScore(){
 
 function saveScore(int, score){
 
+  if(highScore[0]["int"] === "New Player"){
+    highScore.pop();
+  };
+
   let newScore = [];
   newScore = {"int": int, "score": score};
   highScore.push(newScore);
@@ -271,7 +294,45 @@ function saveScore(int, score){
   scoreScreen();
 };
 
-
-
 function scoreScreen(){
+
+  q.innerText = "High Scores";
+  prompt.remove();
+  start.remove();
+
+  let form = document.querySelector("#form");
+  if(form){
+    form.remove();
+  };
+
+  let submit= document.querySelector("#submit");
+  if(submit){
+    submit.remove();
+  };
+
+  let img = document.querySelector("#excellent");
+  if(img){
+    img.remove();
+  };
+
+  removeBtns();
+  
+  let rankList = document.createElement("ul");
+  btns.appendChild(rankList);
+
+  highScore.forEach((e) => {
+    let ranking = document.createElement("li");
+    ranking.innerText = "Initials: " + e["int"] + " Score: " + e["score"];
+    rankList.appendChild(ranking);
+  });
+
+  let retake = document.createElement("button");
+  retake.setAttribute("type", "button");
+  retake.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
+  retake.innerText = "Retake Quiz";
+  btns.appendChild(retake);
+
+  retake.addEventListener("click", function(){
+    window.location.reload();
+  });
 };
