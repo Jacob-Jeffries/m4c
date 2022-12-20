@@ -84,30 +84,6 @@ function clearBTNS(){
   btns.innerHTML = "";
 };
 
-
-// function removeBtns(){
-//   let BtnA = document.querySelector('#A');
-//   let BtnB = document.querySelector('#B');
-//   let BtnC = document.querySelector('#C');
-//   let BtnD = document.querySelector('#D');
-
-//   if(BtnA){
-//     BtnA.remove();
-//   }
-
-//   if(BtnB){
-//     BtnB.remove();
-//   }
-
-//   if(BtnC){
-//     BtnC.remove();
-//   }
-
-//   if(BtnD){
-//     BtnD.remove();
-//   }
-// };
-
 function newQuestion (i){
   q.innerText = questions[i]["Q"];
   prompt.remove();
