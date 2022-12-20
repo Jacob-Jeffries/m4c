@@ -1,15 +1,19 @@
+//Setting global variables 
 let hsBtn = document.querySelector('#high-score');
 let currHS = document.querySelector('#curr-leader');
 let timeRemaining = document.querySelector('#time');
 let testArea = document.querySelector('#test-wrapper');
+let card = document.querySelector('#cardWrapper');
 let q = document.querySelector('#Q');
 let prompt = document.querySelector('#prompt');
 let btns = document.querySelector('#btns');
 let start = document.querySelector('#start');
 let tracker = [0,0];
 let timeLeft = 60;
+let timeInterval;
 
 //Question pool pulled from https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
+//More questions could be added without changing the function of the page
 let questions = [
   {
     "Q": 'Inside which HTML element do we put the Javascript?',
@@ -34,6 +38,7 @@ let questions = [
   }
 ];
 
+//The following code pulls the local storage and if nothing exists, it creates a high score object
 if(!JSON.parse(localStorage.getItem('highScore'))){
   let highScore = [
     {
@@ -44,16 +49,21 @@ if(!JSON.parse(localStorage.getItem('highScore'))){
   localStorage.setItem('highScore', JSON.stringify(highScore));
 };
 
-timeRemaining.innerText = "75";
+//Setting the starting screen display for the remaining time
+timeRemaining.innerText = "60";
 
+//The following code calls the local storage and presents the current high score leader 
 highScore = JSON.parse(localStorage.getItem('highScore'));
 currHS.innerText = "Current Leader: "+ highScore[0]["int"];
 
+//This event listener monitors the High Score button and calls the score screen
 hsBtn.addEventListener("click", scoreScreen);
 
+//This event listener calls the main function of the page - beginning the quiz and starting the counter
 start.addEventListener("click", function(){
 
-  let timeInterval = setInterval(function() {
+  //This is the countdown timer - I had a hell of a time trying to figure out where to put this so it didn't get stuck in the question loop!
+  timeInterval = setInterval(function() {
     if (timeLeft > 1){
       timeRemaining.innerText = timeLeft;
       timeLeft--;
@@ -64,13 +74,16 @@ start.addEventListener("click", function(){
     }
   }, 1000);
 
+  //Calling the main function to begin the quiz, it is fed the tracker array that tracks [0] the question, and [1] the score
   main(tracker[0], tracker[1]);
 });
 
+//This is the main function that helps iterate through the questions, it checks if all the questions have been asked and then points to the endSeries() function
 function main(i, score){
     if(questions[i]){
     newQuestion(i);
     select(i, score);
+  //This else if, prevents calling the endSeries() twice!
   }else if(timeLeft <= 0){
     return;
   }else{
@@ -78,36 +91,21 @@ function main(i, score){
   }
 };
 
-function removeBtns(){
-  let BtnA = document.querySelector('#A');
-  let BtnB = document.querySelector('#B');
-  let BtnC = document.querySelector('#C');
-  let BtnD = document.querySelector('#D');
-
-  if(BtnA){
-    BtnA.remove();
-  }
-
-  if(BtnB){
-    BtnB.remove();
-  }
-
-  if(BtnC){
-    BtnC.remove();
-  }
-
-  if(BtnD){
-    BtnD.remove();
-  }
+//This code clears all the children of the btns div
+function clearBTNS(){
+  btns.innerHTML = "";
 };
 
+//This following function generates and appends each new question
 function newQuestion (i){
   q.innerText = questions[i]["Q"];
-  prompt.style.display = "none";
-  start.style.display = "none";
 
-  removeBtns();
+  //I have to clear the old items off the div
+  prompt.remove();
+  start.remove();
+  clearBTNS();
 
+  //Each question is a 4-part multiple choice question
   let btnA = document.createElement("button");
     btnA.setAttribute("type", "button");
     btnA.setAttribute("id", "A");
@@ -135,7 +133,8 @@ function newQuestion (i){
     btnD.setAttribute("class", "btn bg-dark rounded btn-outline-secondary text-white w-100 m-1");
     btnD.innerText = questions[i]["D"][1];
     btns.appendChild(btnD);
-    
+  
+  //Return nothing back to main for the answer selection function
   return;
 };
 
@@ -144,6 +143,7 @@ function newQuestion (i){
 //element.addEventListener("click", function(){ myFunction(p1, p2); });
 //Like WTF JS - just pass a parameter!
 
+//This function listens for each answer button click then points to a specific function to decide if the answer is correct or not
 function select(i, score){
 
   let btnA = document.querySelector('#A');
@@ -176,6 +176,8 @@ function select(i, score){
   });
 };
 
+//This following 4 functions decide if a selected answer is correct or incorrect, iterates to the next question counter, and if an incorrect answer is selected reduces the amount of time remaining
+//This probably could have been coded in a loop if I had more time
 function checkA(i, currScore){
   if(questions[i]["A"][0]){
     currScore++;
@@ -224,14 +226,19 @@ function checkD(i, currScore){
   }
 };
 
+//This function takes the scores at the end of the quiz (or at the end of time), and asks the user to log their initials in the leader board
 function endSeries(i, finalScore){
+  clearInterval(timeInterval);
+  timeRemaining.innerText = "END";
 
   let br = document.createElement("br");
 
-  removeBtns();
   q.innerText = "Your Final Score is: " + finalScore +" out of a possible " + i + ".";
 
-  if((finalScore/3)*100 == 100){
+  clearBTNS();
+
+  //You can hear it - Excellent!
+  if((finalScore/questions.length)*100 == 100){
     let excellent = document.createElement("img");
     excellent.setAttribute("id", "excellent");
     excellent.setAttribute("src", "./images/excellent.jpg");
@@ -269,16 +276,14 @@ function endSeries(i, finalScore){
 
   let initials = document.querySelector('#int');
 
-
+  //Event listener to submit the form, since I used a submit type, I had to prevent Default
   submit.addEventListener("click", function(){
     event.preventDefault();
     saveScore(initials.value.trim(), finalScore);
   });
 }
-// function loadScore(){
-//   let highScore = localStorage.getItem('highScore');
-// };
 
+//This function takes the score and initials, then pushes and sorts the high score object
 function saveScore(int, score){
 
   if(highScore[0]["int"] === "New Player"){
@@ -287,23 +292,30 @@ function saveScore(int, score){
 
   let newScore = [];
   newScore = {"int": int, "score": score};
+
+  //push to new object to the array
   highScore.push(newScore);
-  console.log(highScore);
 
+  //Sort the array 
   highScore.sort((a, b) => b.score - a.score);
-  console.log(highScore);
 
+  //Store the new array into local storage
   localStorage.setItem('highScore', JSON.stringify(highScore));
 
+  //calls the end function to see the leader board and retake the quiz
   scoreScreen();
 };
 
+//Final leader board screen
 function scoreScreen(){
 
   q.innerText = "High Scores";
+
+  //Clears the card div
   prompt.remove();
   start.remove();
 
+  //depending on how you ended the quiz different items my still be left
   let form = document.querySelector("#form");
   if(form){
     form.remove();
@@ -319,8 +331,9 @@ function scoreScreen(){
     img.remove();
   };
 
-  removeBtns();
-  
+  clearBTNS();
+
+  //Create and append the leader board list  
   let rankList = document.createElement("ul");
   btns.appendChild(rankList);
 
@@ -336,6 +349,7 @@ function scoreScreen(){
   retake.innerText = "Retake Quiz";
   btns.appendChild(retake);
 
+  //Retake the quiz button simply refreshes the page to the start screen again
   retake.addEventListener("click", function(){
     window.location.reload();
   });
